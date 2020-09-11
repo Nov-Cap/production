@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.dayu.mapper.TabOrderMapper">
+
+    <resultMap type="TabOrder" id="TabOrderResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="taskId"    column="task_id"    />
+        <result property="orderTime"    column="order_time"    />
+        <result property="completionTime"    column="completion_time"    />
+        <result property="productName"    column="product_name"    />
+        <result property="productNo"    column="product_no"    />
+        <result property="probesNumber"    column="probes_number"    />
+        <result property="probesHouse"    column="probes_house"    />
+        <result property="buyingCompany"    column="buying_company"    />
+        <result property="developmentBoardsNumber"    column="development_boards_number"    />
+        <result property="taskRange"    column="task_range"    />
+        <result property="blindArea"    column="blind_area"    />
+        <result property="probeType"    column="probe_type"    />
+        <result property="temperatureSensor"    column="temperature_sensor"    />
+        <result property="probeFrequency"    column="probe_frequency"    />
+        <result property="probeInstallationSize"    column="probe_installation_size"    />
+        <result property="plateModel"    column="plate_model"    />
+        <result property="plateCompany"    column="plate_company"    />
+        <result property="deliveryTime"    column="delivery_time"    />
+        <result property="expressType"    column="express_type"    />
+        <result property="probeCableLength"    column="probe_cable_length"    />
+        <result property="probeSplitCableCoreNumber"    column="probe_split_cable_core_number"    />
+        <result property="oRing"    column="O_ring"    />
+        <result property="nut"    column="nut"    />
+        <result property="matchingPulseTransformerType"    column="matching_pulse_transformer_type"    />
+        <result property="pulseTransformersNumber"    column="pulse_transformers_number"    />
+        <result property="contractSpecificationsImageUrl"    column="contract_specifications_image_url"    />
+        <result property="contractSpecificationsDescribe"    column="contract_specifications_describe"    />
+        <result property="specialRequirements"    column="special_requirements"    />
+        <result property="productOther"    column="product_other"    />
+        <result property="shellType"    column="shell_type"    />
+        <result property="threadSystem"    column="thread_system_"    />
+        <result property="powerSupply"    column="power_supply"    />
+        <result property="output"    column="output"    />
+        <result property="relay"    column="relay"    />
+        <result property="communicationProtocol"    column="communication_protocol"    />
+        <result property="descriptionType"    column="description_type"    />
+        <result property="threadSize"    column="thread_size"    />
+        <result property="flangeSize"    column="flange_size"    />
+        <result property="measuredMedium"    column="measured_medium"    />
+        <result property="flangeMaterial"    column="flange_material"    />
+        <result property="isWiringAllowed"    column="Is_wiring_allowed"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="productModel"    column="product_model"    />
+        <result property="mpProductName"    column="mp_product_name"    />
+        <result property="mpProductModel"    column="mp_product_model"    />
+        <result property="mpTaskRange"    column="mp_task_range"    />
+        <result property="mpThreadSysteml"    column="mp_thread_systeml"    />
+        <result property="mpCableLength"    column="mp_cable_length"    />
+        <result property="mpWorkingTemperature"    column="mp_working_temperature"    />
+        <result property="mpPowerSupply"    column="mp_power_supply"    />
+        <result property="mpOutput"    column="mp_output"    />
+        <result property="mpCorporateName"    column="mp_corporate_name"    />
+        <result property="mpProductItemNumber"    column="mp_product_item_number"    />
+        <result property="mpProtectionLevel"    column="mp_protection_level"    />
+        <result property="mpProductNumber"    column="mp_product_number"    />
+        <result property="mpProductTelephone"    column="mp_product_telephone"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectTabOrderVo">
+        select id, order_no, task_id, order_time, completion_time, product_name, product_no, probes_number, probes_house, buying_company, development_boards_number, task_range, blind_area, probe_type, temperature_sensor, probe_frequency, probe_installation_size, plate_model, plate_company, delivery_time, express_type, probe_cable_length, probe_split_cable_core_number, O_ring, nut, matching_pulse_transformer_type, pulse_transformers_number, contract_specifications_image_url, contract_specifications_describe, special_requirements, product_other, shell_type, thread_system_, power_supply, output, relay, communication_protocol, description_type, thread_size, flange_size, measured_medium, flange_material, Is_wiring_allowed, remarks, product_model, mp_product_name, mp_product_model, mp_task_range, mp_thread_systeml, mp_cable_length, mp_working_temperature, mp_power_supply, mp_output, mp_corporate_name, mp_product_item_number, mp_protection_level, mp_product_number, mp_product_telephone, create_time, update_time, create_by, update_by from tab_order
+    </sql>
+
+    <select id="selectTabOrderList" parameterType="TabOrder" resultMap="TabOrderResult">
+        <include refid="selectTabOrderVo"/>
+        <where>
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="taskId != null "> and task_id = #{taskId}</if>
+            <if test="orderTime != null "> and order_time = #{orderTime}</if>
+            <if test="completionTime != null "> and completion_time = #{completionTime}</if>
+            <if test="productName != null  and productName != ''"> and product_name like concat('%', #{productName}, '%')</if>
+            <if test="productNo != null "> and product_no = #{productNo}</if>
+            <if test="probesNumber != null "> and probes_number = #{probesNumber}</if>
+            <if test="probesHouse != null "> and probes_house = #{probesHouse}</if>
+            <if test="buyingCompany != null  and buyingCompany != ''"> and buying_company = #{buyingCompany}</if>
+            <if test="developmentBoardsNumber != null "> and development_boards_number = #{developmentBoardsNumber}</if>
+            <if test="taskRange != null  and taskRange != ''"> and task_range = #{taskRange}</if>
+            <if test="blindArea != null  and blindArea != ''"> and blind_area = #{blindArea}</if>
+            <if test="probeType != null "> and probe_type = #{probeType}</if>
+            <if test="temperatureSensor != null "> and temperature_sensor = #{temperatureSensor}</if>
+            <if test="probeFrequency != null  and probeFrequency != ''"> and probe_frequency = #{probeFrequency}</if>
+            <if test="probeInstallationSize != null "> and probe_installation_size = #{probeInstallationSize}</if>
+            <if test="plateModel != null  and plateModel != ''"> and plate_model = #{plateModel}</if>
+            <if test="plateCompany != null  and plateCompany != ''"> and plate_company = #{plateCompany}</if>
+            <if test="deliveryTime != null "> and delivery_time = #{deliveryTime}</if>
+            <if test="expressType != null "> and express_type = #{expressType}</if>
+            <if test="probeCableLength != null "> and probe_cable_length = #{probeCableLength}</if>
+            <if test="probeSplitCableCoreNumber != null "> and probe_split_cable_core_number = #{probeSplitCableCoreNumber}</if>
+            <if test="oRing != null "> and O_ring = #{oRing}</if>
+            <if test="nut != null "> and nut = #{nut}</if>
+            <if test="matchingPulseTransformerType != null "> and matching_pulse_transformer_type = #{matchingPulseTransformerType}</if>
+            <if test="pulseTransformersNumber != null "> and pulse_transformers_number = #{pulseTransformersNumber}</if>
+            <if test="contractSpecificationsImageUrl != null  and contractSpecificationsImageUrl != ''"> and contract_specifications_image_url = #{contractSpecificationsImageUrl}</if>
+            <if test="contractSpecificationsDescribe != null  and contractSpecificationsDescribe != ''"> and contract_specifications_describe = #{contractSpecificationsDescribe}</if>
+            <if test="specialRequirements != null  and specialRequirements != ''"> and special_requirements = #{specialRequirements}</if>
+            <if test="productOther != null  and productOther != ''"> and product_other = #{productOther}</if>
+            <if test="shellType != null "> and shell_type = #{shellType}</if>
+            <if test="threadSystem != null "> and thread_system_ = #{threadSystem}</if>
+            <if test="powerSupply != null "> and power_supply = #{powerSupply}</if>
+            <if test="output != null "> and output = #{output}</if>
+            <if test="relay != null "> and relay = #{relay}</if>
+            <if test="communicationProtocol != null "> and communication_protocol = #{communicationProtocol}</if>
+            <if test="descriptionType != null "> and description_type = #{descriptionType}</if>
+            <if test="threadSize != null "> and thread_size = #{threadSize}</if>
+            <if test="flangeSize != null "> and flange_size = #{flangeSize}</if>
+            <if test="measuredMedium != null  and measuredMedium != ''"> and measured_medium = #{measuredMedium}</if>
+            <if test="flangeMaterial != null "> and flange_material = #{flangeMaterial}</if>
+            <if test="isWiringAllowed != null "> and Is_wiring_allowed = #{isWiringAllowed}</if>
+            <if test="remarks != null  and remarks != ''"> and remarks = #{remarks}</if>
+            <if test="productModel != null  and productModel != ''"> and product_model = #{productModel}</if>
+            <if test="mpProductName != null  and mpProductName != ''"> and mp_product_name like concat('%', #{mpProductName}, '%')</if>
+            <if test="mpProductModel != null  and mpProductModel != ''"> and mp_product_model = #{mpProductModel}</if>
+            <if test="mpTaskRange != null  and mpTaskRange != ''"> and mp_task_range = #{mpTaskRange}</if>
+            <if test="mpThreadSysteml != null  and mpThreadSysteml != ''"> and mp_thread_systeml = #{mpThreadSysteml}</if>
+            <if test="mpCableLength != null  and mpCableLength != ''"> and mp_cable_length = #{mpCableLength}</if>
+            <if test="mpWorkingTemperature != null  and mpWorkingTemperature != ''"> and mp_working_temperature = #{mpWorkingTemperature}</if>
+            <if test="mpPowerSupply != null  and mpPowerSupply != ''"> and mp_power_supply = #{mpPowerSupply}</if>
+            <if test="mpOutput != null  and mpOutput != ''"> and mp_output = #{mpOutput}</if>
+            <if test="mpCorporateName != null  and mpCorporateName != ''"> and mp_corporate_name like concat('%', #{mpCorporateName}, '%')</if>
+            <if test="mpProductItemNumber != null  and mpProductItemNumber != ''"> and mp_product_item_number = #{mpProductItemNumber}</if>
+            <if test="mpProtectionLevel != null  and mpProtectionLevel != ''"> and mp_protection_level = #{mpProtectionLevel}</if>
+            <if test="mpProductNumber != null  and mpProductNumber != ''"> and mp_product_number = #{mpProductNumber}</if>
+            <if test="mpProductTelephone != null  and mpProductTelephone != ''"> and mp_product_telephone = #{mpProductTelephone}</if>
+        </where>
+    </select>
+
+    <select id="selectTabOrderById" parameterType="Long" resultMap="TabOrderResult">
+        <include refid="selectTabOrderVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTabOrder" parameterType="TabOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into tab_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">order_no,</if>
+            <if test="taskId != null">task_id,</if>
+            <if test="orderTime != null">order_time,</if>
+            <if test="completionTime != null">completion_time,</if>
+            <if test="productName != null">product_name,</if>
+            <if test="productNo != null">product_no,</if>
+            <if test="probesNumber != null">probes_number,</if>
+            <if test="probesHouse != null">probes_house,</if>
+            <if test="buyingCompany != null">buying_company,</if>
+            <if test="developmentBoardsNumber != null">development_boards_number,</if>
+            <if test="taskRange != null">task_range,</if>
+            <if test="blindArea != null">blind_area,</if>
+            <if test="probeType != null">probe_type,</if>
+            <if test="temperatureSensor != null">temperature_sensor,</if>
+            <if test="probeFrequency != null">probe_frequency,</if>
+            <if test="probeInstallationSize != null">probe_installation_size,</if>
+            <if test="plateModel != null">plate_model,</if>
+            <if test="plateCompany != null">plate_company,</if>
+            <if test="deliveryTime != null">delivery_time,</if>
+            <if test="expressType != null">express_type,</if>
+            <if test="probeCableLength != null">probe_cable_length,</if>
+            <if test="probeSplitCableCoreNumber != null">probe_split_cable_core_number,</if>
+            <if test="oRing != null">O_ring,</if>
+            <if test="nut != null">nut,</if>
+            <if test="matchingPulseTransformerType != null">matching_pulse_transformer_type,</if>
+            <if test="pulseTransformersNumber != null">pulse_transformers_number,</if>
+            <if test="contractSpecificationsImageUrl != null">contract_specifications_image_url,</if>
+            <if test="contractSpecificationsDescribe != null">contract_specifications_describe,</if>
+            <if test="specialRequirements != null">special_requirements,</if>
+            <if test="productOther != null">product_other,</if>
+            <if test="shellType != null">shell_type,</if>
+            <if test="threadSystem != null">thread_system_,</if>
+            <if test="powerSupply != null">power_supply,</if>
+            <if test="output != null">output,</if>
+            <if test="relay != null">relay,</if>
+            <if test="communicationProtocol != null">communication_protocol,</if>
+            <if test="descriptionType != null">description_type,</if>
+            <if test="threadSize != null">thread_size,</if>
+            <if test="flangeSize != null">flange_size,</if>
+            <if test="measuredMedium != null">measured_medium,</if>
+            <if test="flangeMaterial != null">flange_material,</if>
+            <if test="isWiringAllowed != null">Is_wiring_allowed,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="productModel != null">product_model,</if>
+            <if test="mpProductName != null">mp_product_name,</if>
+            <if test="mpProductModel != null">mp_product_model,</if>
+            <if test="mpTaskRange != null">mp_task_range,</if>
+            <if test="mpThreadSysteml != null">mp_thread_systeml,</if>
+            <if test="mpCableLength != null">mp_cable_length,</if>
+            <if test="mpWorkingTemperature != null">mp_working_temperature,</if>
+            <if test="mpPowerSupply != null">mp_power_supply,</if>
+            <if test="mpOutput != null">mp_output,</if>
+            <if test="mpCorporateName != null">mp_corporate_name,</if>
+            <if test="mpProductItemNumber != null">mp_product_item_number,</if>
+            <if test="mpProtectionLevel != null">mp_protection_level,</if>
+            <if test="mpProductNumber != null">mp_product_number,</if>
+            <if test="mpProductTelephone != null">mp_product_telephone,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">#{orderNo},</if>
+            <if test="taskId != null">#{taskId},</if>
+            <if test="orderTime != null">#{orderTime},</if>
+            <if test="completionTime != null">#{completionTime},</if>
+            <if test="productName != null">#{productName},</if>
+            <if test="productNo != null">#{productNo},</if>
+            <if test="probesNumber != null">#{probesNumber},</if>
+            <if test="probesHouse != null">#{probesHouse},</if>
+            <if test="buyingCompany != null">#{buyingCompany},</if>
+            <if test="developmentBoardsNumber != null">#{developmentBoardsNumber},</if>
+            <if test="taskRange != null">#{taskRange},</if>
+            <if test="blindArea != null">#{blindArea},</if>
+            <if test="probeType != null">#{probeType},</if>
+            <if test="temperatureSensor != null">#{temperatureSensor},</if>
+            <if test="probeFrequency != null">#{probeFrequency},</if>
+            <if test="probeInstallationSize != null">#{probeInstallationSize},</if>
+            <if test="plateModel != null">#{plateModel},</if>
+            <if test="plateCompany != null">#{plateCompany},</if>
+            <if test="deliveryTime != null">#{deliveryTime},</if>
+            <if test="expressType != null">#{expressType},</if>
+            <if test="probeCableLength != null">#{probeCableLength},</if>
+            <if test="probeSplitCableCoreNumber != null">#{probeSplitCableCoreNumber},</if>
+            <if test="oRing != null">#{oRing},</if>
+            <if test="nut != null">#{nut},</if>
+            <if test="matchingPulseTransformerType != null">#{matchingPulseTransformerType},</if>
+            <if test="pulseTransformersNumber != null">#{pulseTransformersNumber},</if>
+            <if test="contractSpecificationsImageUrl != null">#{contractSpecificationsImageUrl},</if>
+            <if test="contractSpecificationsDescribe != null">#{contractSpecificationsDescribe},</if>
+            <if test="specialRequirements != null">#{specialRequirements},</if>
+            <if test="productOther != null">#{productOther},</if>
+            <if test="shellType != null">#{shellType},</if>
+            <if test="threadSystem != null">#{threadSystem},</if>
+            <if test="powerSupply != null">#{powerSupply},</if>
+            <if test="output != null">#{output},</if>
+            <if test="relay != null">#{relay},</if>
+            <if test="communicationProtocol != null">#{communicationProtocol},</if>
+            <if test="descriptionType != null">#{descriptionType},</if>
+            <if test="threadSize != null">#{threadSize},</if>
+            <if test="flangeSize != null">#{flangeSize},</if>
+            <if test="measuredMedium != null">#{measuredMedium},</if>
+            <if test="flangeMaterial != null">#{flangeMaterial},</if>
+            <if test="isWiringAllowed != null">#{isWiringAllowed},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="productModel != null">#{productModel},</if>
+            <if test="mpProductName != null">#{mpProductName},</if>
+            <if test="mpProductModel != null">#{mpProductModel},</if>
+            <if test="mpTaskRange != null">#{mpTaskRange},</if>
+            <if test="mpThreadSysteml != null">#{mpThreadSysteml},</if>
+            <if test="mpCableLength != null">#{mpCableLength},</if>
+            <if test="mpWorkingTemperature != null">#{mpWorkingTemperature},</if>
+            <if test="mpPowerSupply != null">#{mpPowerSupply},</if>
+            <if test="mpOutput != null">#{mpOutput},</if>
+            <if test="mpCorporateName != null">#{mpCorporateName},</if>
+            <if test="mpProductItemNumber != null">#{mpProductItemNumber},</if>
+            <if test="mpProtectionLevel != null">#{mpProtectionLevel},</if>
+            <if test="mpProductNumber != null">#{mpProductNumber},</if>
+            <if test="mpProductTelephone != null">#{mpProductTelephone},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTabOrder" parameterType="TabOrder">
+        update tab_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null">order_no = #{orderNo},</if>
+            <if test="taskId != null">task_id = #{taskId},</if>
+            <if test="orderTime != null">order_time = #{orderTime},</if>
+            <if test="completionTime != null">completion_time = #{completionTime},</if>
+            <if test="productName != null">product_name = #{productName},</if>
+            <if test="productNo != null">product_no = #{productNo},</if>
+            <if test="probesNumber != null">probes_number = #{probesNumber},</if>
+            <if test="probesHouse != null">probes_house = #{probesHouse},</if>
+            <if test="buyingCompany != null">buying_company = #{buyingCompany},</if>
+            <if test="developmentBoardsNumber != null">development_boards_number = #{developmentBoardsNumber},</if>
+            <if test="taskRange != null">task_range = #{taskRange},</if>
+            <if test="blindArea != null">blind_area = #{blindArea},</if>
+            <if test="probeType != null">probe_type = #{probeType},</if>
+            <if test="temperatureSensor != null">temperature_sensor = #{temperatureSensor},</if>
+            <if test="probeFrequency != null">probe_frequency = #{probeFrequency},</if>
+            <if test="probeInstallationSize != null">probe_installation_size = #{probeInstallationSize},</if>
+            <if test="plateModel != null">plate_model = #{plateModel},</if>
+            <if test="plateCompany != null">plate_company = #{plateCompany},</if>
+            <if test="deliveryTime != null">delivery_time = #{deliveryTime},</if>
+            <if test="expressType != null">express_type = #{expressType},</if>
+            <if test="probeCableLength != null">probe_cable_length = #{probeCableLength},</if>
+            <if test="probeSplitCableCoreNumber != null">probe_split_cable_core_number = #{probeSplitCableCoreNumber},</if>
+            <if test="oRing != null">O_ring = #{oRing},</if>
+            <if test="nut != null">nut = #{nut},</if>
+            <if test="matchingPulseTransformerType != null">matching_pulse_transformer_type = #{matchingPulseTransformerType},</if>
+            <if test="pulseTransformersNumber != null">pulse_transformers_number = #{pulseTransformersNumber},</if>
+            <if test="contractSpecificationsImageUrl != null">contract_specifications_image_url = #{contractSpecificationsImageUrl},</if>
+            <if test="contractSpecificationsDescribe != null">contract_specifications_describe = #{contractSpecificationsDescribe},</if>
+            <if test="specialRequirements != null">special_requirements = #{specialRequirements},</if>
+            <if test="productOther != null">product_other = #{productOther},</if>
+            <if test="shellType != null">shell_type = #{shellType},</if>
+            <if test="threadSystem != null">thread_system_ = #{threadSystem},</if>
+            <if test="powerSupply != null">power_supply = #{powerSupply},</if>
+            <if test="output != null">output = #{output},</if>
+            <if test="relay != null">relay = #{relay},</if>
+            <if test="communicationProtocol != null">communication_protocol = #{communicationProtocol},</if>
+            <if test="descriptionType != null">description_type = #{descriptionType},</if>
+            <if test="threadSize != null">thread_size = #{threadSize},</if>
+            <if test="flangeSize != null">flange_size = #{flangeSize},</if>
+            <if test="measuredMedium != null">measured_medium = #{measuredMedium},</if>
+            <if test="flangeMaterial != null">flange_material = #{flangeMaterial},</if>
+            <if test="isWiringAllowed != null">Is_wiring_allowed = #{isWiringAllowed},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="productModel != null">product_model = #{productModel},</if>
+            <if test="mpProductName != null">mp_product_name = #{mpProductName},</if>
+            <if test="mpProductModel != null">mp_product_model = #{mpProductModel},</if>
+            <if test="mpTaskRange != null">mp_task_range = #{mpTaskRange},</if>
+            <if test="mpThreadSysteml != null">mp_thread_systeml = #{mpThreadSysteml},</if>
+            <if test="mpCableLength != null">mp_cable_length = #{mpCableLength},</if>
+            <if test="mpWorkingTemperature != null">mp_working_temperature = #{mpWorkingTemperature},</if>
+            <if test="mpPowerSupply != null">mp_power_supply = #{mpPowerSupply},</if>
+            <if test="mpOutput != null">mp_output = #{mpOutput},</if>
+            <if test="mpCorporateName != null">mp_corporate_name = #{mpCorporateName},</if>
+            <if test="mpProductItemNumber != null">mp_product_item_number = #{mpProductItemNumber},</if>
+            <if test="mpProtectionLevel != null">mp_protection_level = #{mpProtectionLevel},</if>
+            <if test="mpProductNumber != null">mp_product_number = #{mpProductNumber},</if>
+            <if test="mpProductTelephone != null">mp_product_telephone = #{mpProductTelephone},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTabOrderById" parameterType="Long">
+        delete from tab_order where id = #{id}
+    </delete>
+
+    <delete id="deleteTabOrderByIds" parameterType="String">
+        delete from tab_order where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

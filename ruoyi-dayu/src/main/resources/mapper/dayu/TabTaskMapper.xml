@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.dayu.mapper.TabTaskMapper">
+    
+    <resultMap type="TabTask" id="TabTaskResult">
+        <result property="id"    column="id"    />
+        <result property="taskNo"    column="task_no"    />
+        <result property="orderPerson"    column="order_person"    />
+        <result property="productionCharge"    column="production_charge"    />
+        <result property="productionPersonnel"    column="production_personnel"    />
+        <result property="state"    column="state"    />
+        <result property="taskType"    column="task_type"    />
+        <result property="senderShippingAddress"    column="sender_shipping_address"    />
+        <result property="senderShippingCompany"    column="sender_shipping_company"    />
+        <result property="senderUserid"    column="sender_userId"    />
+        <result property="recipientShippingAddress"    column="recipient_shipping_address"    />
+        <result property="recipientShippingCompany"    column="recipient_shipping_company"    />
+        <result property="recipientUserid"    column="recipient_userId"    />
+        <result property="remark"    column="remark"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="createBy"    column="create_by"    />
+    </resultMap>
+
+    <sql id="selectTabTaskVo">
+        select id, task_no, order_person, production_charge, production_personnel, state, task_type, sender_shipping_address, sender_shipping_company, sender_userId, recipient_shipping_address, recipient_shipping_company, recipient_userId, remark, update_time, create_time, update_by, create_by from tab_task
+    </sql>
+
+    <select id="selectTabTaskList" parameterType="TabTask" resultMap="TabTaskResult">
+        <include refid="selectTabTaskVo"/>
+        <where>  
+            <if test="taskNo != null  and taskNo != ''"> and task_no = #{taskNo}</if>
+            <if test="orderPerson != null "> and order_person = #{orderPerson}</if>
+            <if test="productionCharge != null "> and production_charge = #{productionCharge}</if>
+            <if test="productionPersonnel != null "> and production_personnel = #{productionPersonnel}</if>
+            <if test="state != null "> and state = #{state}</if>
+            <if test="taskType != null "> and task_type = #{taskType}</if>
+            <if test="senderShippingAddress != null  and senderShippingAddress != ''"> and sender_shipping_address = #{senderShippingAddress}</if>
+            <if test="senderShippingCompany != null  and senderShippingCompany != ''"> and sender_shipping_company = #{senderShippingCompany}</if>
+            <if test="senderUserid != null "> and sender_userId = #{senderUserid}</if>
+            <if test="recipientShippingAddress != null  and recipientShippingAddress != ''"> and recipient_shipping_address = #{recipientShippingAddress}</if>
+            <if test="recipientShippingCompany != null  and recipientShippingCompany != ''"> and recipient_shipping_company = #{recipientShippingCompany}</if>
+            <if test="recipientUserid != null "> and recipient_userId = #{recipientUserid}</if>
+        </where>
+    </select>
+    
+    <select id="selectTabTaskById" parameterType="Long" resultMap="TabTaskResult">
+        <include refid="selectTabTaskVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTabTask" parameterType="TabTask" useGeneratedKeys="true" keyProperty="id">
+        insert into tab_task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskNo != null and taskNo != ''">task_no,</if>
+            <if test="orderPerson != null">order_person,</if>
+            <if test="productionCharge != null">production_charge,</if>
+            <if test="productionPersonnel != null">production_personnel,</if>
+            <if test="state != null">state,</if>
+            <if test="taskType != null">task_type,</if>
+            <if test="senderShippingAddress != null">sender_shipping_address,</if>
+            <if test="senderShippingCompany != null">sender_shipping_company,</if>
+            <if test="senderUserid != null">sender_userId,</if>
+            <if test="recipientShippingAddress != null">recipient_shipping_address,</if>
+            <if test="recipientShippingCompany != null">recipient_shipping_company,</if>
+            <if test="recipientUserid != null">recipient_userId,</if>
+            <if test="remark != null">remark,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="createBy != null">create_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="taskNo != null and taskNo != ''">#{taskNo},</if>
+            <if test="orderPerson != null">#{orderPerson},</if>
+            <if test="productionCharge != null">#{productionCharge},</if>
+            <if test="productionPersonnel != null">#{productionPersonnel},</if>
+            <if test="state != null">#{state},</if>
+            <if test="taskType != null">#{taskType},</if>
+            <if test="senderShippingAddress != null">#{senderShippingAddress},</if>
+            <if test="senderShippingCompany != null">#{senderShippingCompany},</if>
+            <if test="senderUserid != null">#{senderUserid},</if>
+            <if test="recipientShippingAddress != null">#{recipientShippingAddress},</if>
+            <if test="recipientShippingCompany != null">#{recipientShippingCompany},</if>
+            <if test="recipientUserid != null">#{recipientUserid},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="createBy != null">#{createBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTabTask" parameterType="TabTask">
+        update tab_task
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="taskNo != null and taskNo != ''">task_no = #{taskNo},</if>
+            <if test="orderPerson != null">order_person = #{orderPerson},</if>
+            <if test="productionCharge != null">production_charge = #{productionCharge},</if>
+            <if test="productionPersonnel != null">production_personnel = #{productionPersonnel},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="taskType != null">task_type = #{taskType},</if>
+            <if test="senderShippingAddress != null">sender_shipping_address = #{senderShippingAddress},</if>
+            <if test="senderShippingCompany != null">sender_shipping_company = #{senderShippingCompany},</if>
+            <if test="senderUserid != null">sender_userId = #{senderUserid},</if>
+            <if test="recipientShippingAddress != null">recipient_shipping_address = #{recipientShippingAddress},</if>
+            <if test="recipientShippingCompany != null">recipient_shipping_company = #{recipientShippingCompany},</if>
+            <if test="recipientUserid != null">recipient_userId = #{recipientUserid},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTabTaskById" parameterType="Long">
+        delete from tab_task where id = #{id}
+    </delete>
+
+    <delete id="deleteTabTaskByIds" parameterType="String">
+        delete from tab_task where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

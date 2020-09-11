@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.dayu.mapper.TabCustomerInformationMapper">
+    
+    <resultMap type="TabCustomerInformation" id="TabCustomerInformationResult">
+        <result property="id"    column="id"    />
+        <result property="customerName"    column="customer_name"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="contacts"    column="contacts"    />
+        <result property="contactNumber"    column="contact_number"    />
+        <result property="shippingAddress"    column="shipping_address"    />
+        <result property="firstTransaction"    column="first_transaction"    />
+        <result property="billingInformation"    column="billing_information"    />
+        <result property="reservedFields1"    column="reserved_fields1"    />
+        <result property="reservedFields2"    column="reserved_fields2"    />
+        <result property="reservedFields3"    column="reserved_fields3"    />
+        <result property="reservedFields4"    column="reserved_fields4"    />
+    </resultMap>
+
+    <sql id="selectTabCustomerInformationVo">
+        select id, customer_name, create_by, update_by, create_time, update_time, remark, contacts, contact_number, shipping_address, first_transaction, billing_information, reserved_fields1, reserved_fields2, reserved_fields3, reserved_fields4 from tab_customer_information
+    </sql>
+
+    <!-- 根据汉字模糊查询公司信息-->
+    <select id="getCustomerNameByLikeName" parameterType="String" resultMap="TabCustomerInformationResult">
+        select id ,customer_name from dayu_production_db.tab_customer_information tci
+        <where>
+            <if  test="customerName != null  and customerName != ''">
+                tci.customer_name like concat('%', #{customerName}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectTabCustomerInformationList" parameterType="TabCustomerInformation" resultMap="TabCustomerInformationResult">
+        <include refid="selectTabCustomerInformationVo"/>
+        <where>  
+            <if test="customerName != null  and customerName != ''"> and customer_name like concat('%', #{customerName}, '%')</if>
+            <if test="contacts != null  and contacts != ''"> and contacts = #{contacts}</if>
+            <if test="contactNumber != null  and contactNumber != ''"> and contact_number = #{contactNumber}</if>
+            <if test="shippingAddress != null  and shippingAddress != ''"> and shipping_address = #{shippingAddress}</if>
+            <if test="firstTransaction != null "> and first_transaction = #{firstTransaction}</if>
+        </where>
+    </select>
+    
+    <select id="selectTabCustomerInformationById" parameterType="Long" resultMap="TabCustomerInformationResult">
+        <include refid="selectTabCustomerInformationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTabCustomerInformation" parameterType="TabCustomerInformation" useGeneratedKeys="true" keyProperty="id">
+        insert into tab_customer_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerName != null and customerName != ''">customer_name,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="contacts != null and contacts != ''">contacts,</if>
+            <if test="contactNumber != null and contactNumber != ''">contact_number,</if>
+            <if test="shippingAddress != null and shippingAddress != ''">shipping_address,</if>
+            <if test="firstTransaction != null">first_transaction,</if>
+            <if test="billingInformation != null and billingInformation != ''">billing_information,</if>
+            <if test="reservedFields1 != null">reserved_fields1,</if>
+            <if test="reservedFields2 != null">reserved_fields2,</if>
+            <if test="reservedFields3 != null">reserved_fields3,</if>
+            <if test="reservedFields4 != null">reserved_fields4,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customerName != null and customerName != ''">#{customerName},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="contacts != null and contacts != ''">#{contacts},</if>
+            <if test="contactNumber != null and contactNumber != ''">#{contactNumber},</if>
+            <if test="shippingAddress != null and shippingAddress != ''">#{shippingAddress},</if>
+            <if test="firstTransaction != null">#{firstTransaction},</if>
+            <if test="billingInformation != null and billingInformation != ''">#{billingInformation},</if>
+            <if test="reservedFields1 != null">#{reservedFields1},</if>
+            <if test="reservedFields2 != null">#{reservedFields2},</if>
+            <if test="reservedFields3 != null">#{reservedFields3},</if>
+            <if test="reservedFields4 != null">#{reservedFields4},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTabCustomerInformation" parameterType="TabCustomerInformation">
+        update tab_customer_information
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="customerName != null and customerName != ''">customer_name = #{customerName},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="contacts != null and contacts != ''">contacts = #{contacts},</if>
+            <if test="contactNumber != null and contactNumber != ''">contact_number = #{contactNumber},</if>
+            <if test="shippingAddress != null and shippingAddress != ''">shipping_address = #{shippingAddress},</if>
+            <if test="firstTransaction != null">first_transaction = #{firstTransaction},</if>
+            <if test="billingInformation != null and billingInformation != ''">billing_information = #{billingInformation},</if>
+            <if test="reservedFields1 != null">reserved_fields1 = #{reservedFields1},</if>
+            <if test="reservedFields2 != null">reserved_fields2 = #{reservedFields2},</if>
+            <if test="reservedFields3 != null">reserved_fields3 = #{reservedFields3},</if>
+            <if test="reservedFields4 != null">reserved_fields4 = #{reservedFields4},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTabCustomerInformationById" parameterType="Long">
+        delete from tab_customer_information where id = #{id}
+    </delete>
+
+    <delete id="deleteTabCustomerInformationByIds" parameterType="String">
+        delete from tab_customer_information where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
